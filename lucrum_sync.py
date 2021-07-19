@@ -127,7 +127,7 @@ def pull_process_and_push_data(device, device_attendance_logs=None):
                 str(device_attendance_log['user_id']), str(device_attendance_log['timestamp'].timestamp()),
                 str(device_attendance_log['punch']), str(device_attendance_log['status']),
                 json.dumps(device_attendance_log, default=str)]))
-            if EMPLOYEE_NOT_FOUND_ERROR_MESSAGE not in lucrum_message or DUPLICATE_LOG_ENTRY not in lucrum_message:
+            if EMPLOYEE_NOT_FOUND_ERROR_MESSAGE not in lucrum_message and DUPLICATE_LOG_ENTRY not in lucrum_message:
                 raise Exception('API Call to Lucrum Failed.')
 
 

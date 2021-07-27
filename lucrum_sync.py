@@ -55,7 +55,6 @@ def main():
                         os.remove(dump_file)
                     info_logger.info("Successfully processed Device: "+ device['device_id'])
                 except Exception as e:
-                    print(e)
                     error_logger.exception('exception when calling pull_process_and_push_data function for device'+json.dumps(device, default=str))
             if hasattr(config,'shift_type_device_mapping'):
                 update_shift_last_sync_timestamp(config.shift_type_device_mapping)
@@ -180,7 +179,6 @@ def send_to_lucrum(employee_field_value, timestamp, device_id=None, log_type=Non
         'device_id' : device_id,
         'log_type' : log_type
     }
-    print(data)
     response = requests.request("POST", url, headers=headers, data=data)
     if response.status_code == 200:
         return 200, json.loads(response._content)['message']['name']
@@ -225,6 +223,7 @@ def update_shift_last_sync_timestamp(shift_type_device_mapping):
                     error_logger.exception('Exception in update_shift_last_sync_timestamp, for shift:'+shift)
 
 def send_shift_sync_to_lucrum(shift_type_name, sync_timestamp):
+    print(shift_type_name)
     url = config.LUCRUM_URL + "/api/resource/Shift Type/" + shift_type_name
     headers = {
         'Authorization': "token "+ config.LUCRUM_API_KEY + ":" + config.LUCRUM_API_SECRET,

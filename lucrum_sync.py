@@ -205,6 +205,7 @@ def update_shift_last_sync_timestamp(shift_type_device_mapping):
         pull_timestamp_array = []
         print('In Shift Last Sync Update 1')
         for device_id in shift_type_device_map['related_device_id']:
+            print(f'{device_id}_push_timestamp')
             if not status.get(f'{device_id}_push_timestamp'):
                 all_devices_pushed = False
                 print('In Shift Last Sync Update 2')

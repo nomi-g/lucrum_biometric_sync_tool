@@ -203,12 +203,15 @@ def update_shift_last_sync_timestamp(shift_type_device_mapping):
     for shift_type_device_map in shift_type_device_mapping:
         all_devices_pushed = True
         pull_timestamp_array = []
+        print('In Shift Last Sync Update 1')
         for device_id in shift_type_device_map['related_device_id']:
             if not status.get(f'{device_id}_push_timestamp'):
                 all_devices_pushed = False
+                print('In Shift Last Sync Update 2')
                 break
             pull_timestamp_array.append(_safe_convert_date(status.get(f'{device_id}_pull_timestamp'), "%Y-%m-%d %H:%M:%S.%f"))
         if all_devices_pushed:
+            print('In Shift Last Sync Update 3')
             min_pull_timestamp = min(pull_timestamp_array)
             if isinstance(shift_type_device_map['shift_type_name'], str): # for backward compatibility of config file
                 shift_type_device_map['shift_type_name'] = [shift_type_device_map['shift_type_name']]
